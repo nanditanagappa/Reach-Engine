@@ -13,6 +13,11 @@ class HomePageView(TemplateView):
 		template_name = "index.html"
 		return render(request, template_name, context=None)
 
+class AboutPageView(TemplateView):
+    def get(self, request, **kwargs):
+        template_name = "about.html"
+        return render(request, template_name, context=None)
+
 def get_hashtags(request):
 	data1 = request.GET['fulltextarea'].replace(" ", "").replace("#", "")
 	data = re.sub(r'[^\w\s]','',data1)
