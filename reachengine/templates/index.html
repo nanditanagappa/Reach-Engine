@@ -1,98 +1,257 @@
-{% extends 'base.html' %}
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-	<head>
-    <meta charset="utf-8">
-	{% load staticfiles %}
-	<title>{% block title %}ReachEngine Website {% endblock %}</title>
-	<script src="{% static 'app.js' %}"></script>
+
+<head>
+    <meta charset="utf-8"> 
+    <title>ReachEngine Website</title>
+    <script src="{% static 'app.js' %}"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-	</head>
-		<body style="align-content: center; ">
-			{% block pagecontent %}
-			<div class="header">
-				<h3 style="padding: 10px; background-color: #845EC2; border-radius: 10px;
-					padding: 10px;
-					width: 100%;
-					text-align: center;
-					color: white;
-					font-size: 30px;">
-					Reach Engine
-				</h3>
-			</div>
-		<div style="text-align: center; margin: 0 auto;">
-		<form action="{% url 'fetchHashTag' %}" >
-			
-			<input style="border-radius: 25px; border: 4px solid #845EC2; text-align: center; padding 20px; width: 500px; height: 50px;" 
-			type="text" name="fulltextarea" placeholder="Type a hashtag to search..">
-			
-			<input style="text-align: center; padding: 10px; border-radius: 10px;"
-			type="submit" value="Search"/>
-			
-			<br>
-			<form action="" id="n4"  onkeyup="sync()" 
-			style="text-align: center;">
-				<br>
-				<textarea rows="6" cols="50" id="textAreaToBeCopied" 
-				style="resize: none; text-position: absolute; vertical-align: middle; display: inline-block; border-radius: 25px; font-size: 15px; padding: 10px;">{{top5mostused}}
-				</textarea>
-				<input style="border-radius: 10px; text-align: center; padding: 10px;"
-				id="textAreaCopyButton" onclick="theCopyFunction()" type="button" value="Copy"/>
-				<br>
-				<script>
-					function theCopyFunction() {
-						var copyText = document.getElementById("textAreaToBeCopied");
-						copyText.select();
-						copyText.setSelectionRange(0, 99999);
-						document.execCommand("copy");
-						alert("Copied the text");
-						console.log(copyText.value);
-					}
-					
-					function theTwitterLoginButton() {
-						window.open('https://www.twitter.com/login', '_blank');
-					}
-				</script>
-				<!-- onclick="location.href='https://www.twitter.com/LOGIN';" -->
-				<br>
-				<div style="text-align: center;">
-				<input type="image" name="twitterLogin" src="https://bit.ly/3n7gpkR" width="100" height="48" alt="submit" onclick="theTwitterLoginButton()" />
-				</div>
-				<br>
-				<!-- <button id="loginButton" style="height: 48; width: 100;" onclick="theTwitterLoginButton()"><img src="https://bit.ly/3n7gpkR"></button> -->
-				<div style="text-align: center;">
-				<table style="width: 110%; margin-left: auto; margin-right: auto; border: 1px solid #845EC2; text-align: center; padding: 3px;">
-					<tr style="border: 1px solid #845EC2;">
-						<th style="border: 1px solid #845EC2;">Searched Keyword</th>
-						<th style="border: 1px solid #845EC2;">Top 5 Most Used<th>
-					</tr>
-						<td style="border: 1px solid #845EC2;">{{searched_word}}</td>
-						<td style="border: 1px solid #845EC2;">{{top5mostused}}</td>
-					</tr>
-				</table>
-				</div>	
-				
-				<br>
-				
-				
-				<!-- <p> <b>Searched Keyword : </b> {{searched_word}} </p>
-				<br>
-				<p> <b>Top 5 Most used relevant hashtags : </b> {{top5mostused}} </p>
-				<br> -->
-				<p> <b>Recently Searched Hashtags : </b> {{recentlySearched}} </p>
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-			</form>
-		</form>
-		</div>
-		</body>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script> -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .bg-dark {
+            background-color: black!important;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgb(255 255 255 / 85%);
+        }
+        
+        .navbar {
+            padding-left: 1%;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
+        .jumbotron {
+            padding: 0rem 0rem;
+        }
+        
+        body {
+            background-color: #ffdbb9;
+        }
+        
+        .table .thead-light th {
+            color: #495057;
+            background-color: #d0aeae;
+            border-color: #000000;
+        }
+        
+        .table-bordered thead td,
+        .table-bordered thead th {
+            border-bottom-width: 2px;
+        }
+        
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #000000;
+        }
+        
+        .table-bordered td,
+        .table-bordered th {
+            border: 1px solid #0a0a0a;
+        }
+        
+        .table td,
+        .table th {
+            padding: .75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .container1 {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        input,
+        button {
+            border: none;
+            background: none;
+            outline: none;
+        }
+        
+        button {
+            cursor: pointer;
+        }
+        
+        .search-box {
+            display: flex;
+            background: #08090a99;
+            border-radius: 4em;
+        }
+        
+        .search-box-input {
+            width: 0px;
+            font-size: 1em;
+            color: #fff;
+            transition: .5s;
+        }
+        
+        .search-box-btn {
+            display: flex;
+            border-radius: 50%;
+            width: 4em;
+            height: 4em;
+            background: white;
+            transition: .3s;
+        }
+        
+        .search-box-icon {
+            margin: auto;
+            color: black;
+        }
+        
+        .search-box-input::placeholder {
+            color: white;
+            opacity: .7;
+        }
+        
+        .search-box:hover .search-box-input {
+            padding-left: 2em;
+            padding-right: 1em;
+            width: 340px;
+        }
+        
+        .search-box-btn:active {
+            transform: scale(.75);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">
+            <img src="0002.png" alt="logo" style="width:200px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+            </ul>
+            <ul class="navbar-nav ">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="fa fa-home"></i> Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">
+                        <i class="fa fa-info-circle"></i> About
+                        <span class="sr-only">(current)</span>
+                    </a>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+       
+        <!-- <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+            </div>
+        </div> -->
+        <div style="margin-top: 1%;">
+            <form action="{% url 'fetchHashTag' %}">
+                <!-- <div class="input-group">
+                    <input type="text" class="form-control" name="fulltextarea" class="form-control" placeholder="Type a hashtag to search..">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+						<i class="fa fa-search"></i>  Search
+					  </button>
+                    </div>
+                </div> -->
+                <br>
+                <div class="container1">
+                    <div class="search-box">
+                        <input class="search-box-input" type="text" class="form-control" name="fulltextarea" class="form-control" placeholder="Type a hashtag to search..">
+                        <button class="search-box-btn" type="submit">
+							  <i class="search-box-icon material-icons fa fa-search"> Search</i>  
+						  </button>
+                    </div>
+                </div>
+
+                <form action="" id="n4" onkeyup="sync()">
+                    <div class="input-group" style="margin-top: 0%;">
+                        <textarea rows="4" cols="40" id="textAreaToBeCopied" class="form-control">
+						</textarea>
+                    </div>
+
+                    <center style="margin-top: 1%;">
+                        <button class="btn btn-outline-success" id="textAreaCopyButton" onclick="theCopyFunction()" type="submit">
+							<i class="fa fa-copy"></i>  Copy
+					    </button>
+
+                        <button class="btn btn-primary" type="submit" name="twitterLogin" onclick="theTwitterLoginButton()">
+							<i class="fa fa-twitter fa-pulse"></i> twitter 
+				    </button>
+                    </center>
+                    <script>
+                        function theCopyFunction() {
+                            var copyText = document.getElementById("textAreaToBeCopied");
+                            copyText.select();
+                            copyText.setSelectionRange(0, 99999);
+                            document.execCommand("copy");
+                            alert("Copied the text");
+                            console.log(copyText.value);
+                        }
+
+                        function theTwitterLoginButton() {
+                            window.open('https://www.twitter.com/login', '_blank');
+                        }
+                    </script>
+                    <!-- onclick="location.href='https://www.twitter.com/LOGIN';" -->
+
+                    <div>
+                        <br>
+                        <table class="table table-bordered table-hover" border="2">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Searched Keyword</th>
+                                    <th>Top 5 Most Used</th>
+                                </tr>
+                            </thead>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <br>
+                    <p> <b>Recently Searched Hashtags : </b>  </p>
+
+                </form>
+            </form>
+        </div>
+    </div>
+</body>
+
 </html>
 
 
+</body>
 
-
-  {% endblock %}
-
-  </body>
 </html>
