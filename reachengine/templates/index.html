@@ -1,9 +1,11 @@
+{% extends 'base.html' %}
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="utf-8"> 
-    <title>ReachEngine Website</title>
+    <meta charset="utf-8"> {% load staticfiles %}
+    <title>{% block title %}ReachEngine Website {% endblock %}</title>
     <script src="{% static 'app.js' %}"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
@@ -168,7 +170,7 @@
     </nav>
 
     <div class="container">
-       
+        {% block pagecontent %}
         <!-- <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
@@ -196,7 +198,7 @@
 
                 <form action="" id="n4" onkeyup="sync()">
                     <div class="input-group" style="margin-top: 0%;">
-                        <textarea rows="4" cols="40" id="textAreaToBeCopied" class="form-control">
+                        <textarea rows="4" cols="40" id="textAreaToBeCopied" class="form-control">{{top5mostused}}
 						</textarea>
                     </div>
 
@@ -234,14 +236,14 @@
                                     <th>Top 5 Most Used</th>
                                 </tr>
                             </thead>
-                            <td></td>
-                            <td></td>
+                            <td>{{searched_word}}</td>
+                            <td>{{top5mostused}}</td>
                             </tr>
                         </table>
                     </div>
 
                     <br>
-                    <p> <b>Recently Searched Hashtags : </b>  </p>
+                    <p> <b>Recently Searched Hashtags : </b> {{recentlySearched}} </p>
 
                 </form>
             </form>
@@ -252,6 +254,7 @@
 </html>
 
 
+{% endblock %}
 </body>
 
 </html>
