@@ -141,7 +141,7 @@
 </head>
 
 <body>
-
+{% block pagecontent %}
     <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="index.html">
             <img src="0002.png" alt="logo" style="width:200px;">
@@ -171,7 +171,6 @@
     </nav>
 
     <div class="container">
-        {% block pagecontent %}
         <!-- <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
