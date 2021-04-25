@@ -2,15 +2,142 @@
 <!DOCTYPE html>
 <html style="display: grid;
   place-items: center;  ">
-  <head>
-    <meta charset="utf-8">
-    <title>
-      Django Sample Site - {% block title %}{% endblock %}
-    </title>
+ <head>
+    <meta charset="utf-8"> 
+	{% load staticfiles %}
+    <title>{% block title %} ReachEngine Website {% endblock %}</title>
+    <script src="{% static 'app.js' %}"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-    <!-- <script src="{% static 'js/main.js' %}"></script> This is how to include a static file -->
-    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" /> -->
-  </head>
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script> -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .bg-dark {
+            background-color: black!important;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgb(255 255 255 / 85%);
+        }
+        
+        .navbar {
+            padding-left: 1%;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
+        .jumbotron {
+            padding: 0rem 0rem;
+        }
+        
+        body {
+            background-color: #ffdbb9;
+        }
+        
+        .table .thead-light th {
+            color: #495057;
+            background-color: #d0aeae;
+            border-color: #000000;
+        }
+        
+        .table-bordered thead td,
+        .table-bordered thead th {
+            border-bottom-width: 2px;
+        }
+        
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #000000;
+        }
+        
+        .table-bordered td,
+        .table-bordered th {
+            border: 1px solid #0a0a0a;
+        }
+        
+        .table td,
+        .table th {
+            padding: .75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .container1 {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        input,
+        button {
+            border: none;
+            background: none;
+            outline: none;
+        }
+        
+        button {
+            cursor: pointer;
+        }
+        
+        .search-box {
+            display: flex;
+            background: #08090a99;
+            border-radius: 4em;
+        }
+        
+        .search-box-input {
+            width: 0px;
+            font-size: 1em;
+            color: #fff;
+            transition: .5s;
+        }
+        
+        .search-box-btn {
+            display: flex;
+            border-radius: 50%;
+            width: 4em;
+            height: 4em;
+            background: white;
+            transition: .3s;
+        }
+        
+        .search-box-icon {
+            margin: auto;
+            color: black;
+        }
+        
+        .search-box-input::placeholder {
+            color: white;
+            opacity: .7;
+        }
+        
+        .search-box:hover .search-box-input {
+            padding-left: 2em;
+            padding-right: 1em;
+            width: 340px;
+        }
+        
+        .search-box-btn:active {
+            transform: scale(.75);
+        }
+    </style>
+
+</head>
   <body>
     <div class="container">
       {% block pagecontent %}
