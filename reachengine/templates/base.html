@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html style="place-items: center;  ">
-{% block pagecontent %}
  <head>
     <meta charset="utf-8"> 
 	{% load staticfiles %}
@@ -138,6 +137,6 @@
     </style>
 
 </head>   
-      
+      {% block pagecontent %}
       {% endblock %}
 </html>
