@@ -25,7 +25,7 @@ SECRET_KEY = 'dqzwmv(b%11t!19=&&+no4y0$)$+8*b^&*#5=77x8yb)&_x7d!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =  ["reachengine.pythonanywhere.com"]
+ALLOWED_HOSTS =  ['reachengine.pythonanywhere.com']
 
 
 # Application definition
