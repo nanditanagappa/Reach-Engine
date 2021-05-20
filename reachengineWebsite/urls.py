@@ -22,4 +22,7 @@ urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('/about.html', include('reachengine.urls')),
 	path('/index.html', include('reachengine.urls')),
+	path('index/', include('reachengine.urls')),
+	path('about/', include('reachengine.urls')),
+
 ]
