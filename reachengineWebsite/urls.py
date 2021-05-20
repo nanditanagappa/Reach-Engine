@@ -19,10 +19,5 @@ from django.conf.urls import url, include
 
 urlpatterns = [
 	path('', include('reachengine.urls')),
-	path('admin/', admin.site.urls),
-	path('/about.html', include('reachengine.urls')),
-	path('/index.html', include('reachengine.urls')),
-	path('index/', include('reachengine.urls')),
-	path('about/', include('reachengine.urls')),
-
+	path('admin/', admin.site.urls)
 ]
