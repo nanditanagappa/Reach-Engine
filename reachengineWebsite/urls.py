@@ -19,5 +19,6 @@ from django.conf.urls import url, include
 
 urlpatterns = [
 	path('', include('reachengine.urls')),
-	path('admin/', admin.site.urls)
+	path('admin/', admin.site.urls),
+	path('about/', include('reachengine.urls')),
 ]
