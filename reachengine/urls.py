@@ -5,6 +5,6 @@ from django.urls import path
 
 urlpatterns = [
 	url('^$', views.HomePageView.as_view()),
-	path('about/', views.AboutPageView.as_view()),
+	path('index/about.html', views.AboutPageView.as_view()),
 	path('index/', views.get_hashtags, name="fetchHashTag"),
 ]
