@@ -10,5 +10,6 @@ urlpatterns = [
 	path('^$', views.get_hashtags, name="fetchHashTag"),
 	url('index.html', views.HomePageView.as_view()),
 	url('index/', views.HomePageView.as_view()),
+	url('dev.html', views.DevPageView.as_view())
 
 ]
